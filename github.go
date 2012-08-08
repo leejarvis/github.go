@@ -25,15 +25,15 @@ func (u *User) String() string {
 }
 
 type Repo struct {
-	ID int
-	Name string
-	Homepage string
-	CloneURL string
-	GitURL string
-	HtmlURL string `json:"html_url"`
-	WatchersCount int `json:"watchers_count"`
-	Description string
-	Language string
+	ID            int
+	Name          string
+	Homepage      string
+	CloneURL      string
+	GitURL        string
+	HtmlURL       string `json:"html_url"`
+	WatchersCount int    `json:"watchers_count"`
+	Description   string
+	Language      string
 }
 
 func (r *Repo) String() string {
