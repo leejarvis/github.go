@@ -27,4 +27,12 @@ func main() {
 	for _, file := range gist.Files {
 		fmt.Println(file)
 	}
+
+	issues, err := github.GetIssues("mojombo/chronic")
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, issue := range issues {
+		fmt.Println(issue)
+	}
 }

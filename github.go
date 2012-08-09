@@ -67,6 +67,20 @@ func (g *Gist) String() string {
 	return fmt.Sprintf("%s @ %s", g.ID, g.URL)
 }
 
+type Issue struct {
+	ID           int
+	Title        string
+	CommentCount int    `json:"comments"`
+	HtmlURL      string `json:"html_url"`
+	State        string
+	Number       int
+	Body         string
+}
+
+func (i *Issue) String() string {
+	return fmt.Sprintf("[%d] %s (%s)", i.ID, i.Title, i.State)
+}
+
 func get(path string, resource interface{}) error {
 	url := fmt.Sprintf(API_HOST, path)
 	res, err := http.Get(url)
@@ -129,4 +143,16 @@ func GetGist(id string) (*Gist, error) {
 	}
 
 	return gist, nil
+}
+
+func GetIssues(reponame string) ([]*Issue, error) {
+	var issues []*Issue
+	path := fmt.Sprintf("repos/%s/issues", reponame)
+	err := get(path, &issues)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return issues, nil
 }
