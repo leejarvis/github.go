@@ -11,13 +11,17 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	fmt.Println(user)
 
 	repo, err := github.GetRepo("injekt/slop")
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	fmt.Println(repo)
+
+	gist, err := github.GetGist("3302678")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(gist)
 }
