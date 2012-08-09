@@ -44,7 +44,7 @@ type GistFile struct {
 	Type     string
 	Filename string
 	Content  string
-	RawURL   string
+	RawURL   string `json:"raw_url"`
 	Language string
 	Size     int
 }
