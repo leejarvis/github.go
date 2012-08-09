@@ -24,4 +24,7 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(gist)
+	for _, file := range gist.Files {
+		fmt.Println(file)
+	}
 }

@@ -40,12 +40,27 @@ func (r *Repo) String() string {
 	return fmt.Sprintf("[%d] %s @ %s", r.ID, r.Name, r.HtmlURL)
 }
 
+type GistFile struct {
+	Type     string
+	Filename string
+	Content  string
+	RawURL   string
+	Language string
+	Size     int
+}
+
+func (gh *GistFile) String() string {
+	return fmt.Sprintf("%s (%s)", gh.Filename, gh.Language)
+}
+
 type Gist struct {
 	ID           string
 	URL          string `json:"html_url"`
 	Public       bool
 	CommentCount int `json:"comments"`
 	Description  string
+	Files        map[string]*GistFile
+	Content      string
 }
 
 func (g *Gist) String() string {
@@ -105,6 +120,12 @@ func GetGist(id string) (*Gist, error) {
 
 	if err != nil {
 		return nil, err
+	}
+
+	if len(gist.Files) == 1 {
+		for _, gf := range gist.Files {
+			gist.Content = gf.Content
+		}
 	}
 
 	return gist, nil
